@@ -2,12 +2,9 @@
 
 declare(strict_types=1);
 
-use Stancl\Tenancy\Database\Models\Domain;
-use Stancl\Tenancy\Database\Models\Tenant;
-
 return [
-    'tenant_model' => Tenant::class,
-    'domain_model' => Domain::class,
+    'tenant_model' => \App\Models\Tenant::class,
+    'domain_model' => \App\Models\Domain::class,
 
     'id_generator' => Stancl\Tenancy\UUIDGenerator::class,
 
@@ -19,6 +16,7 @@ return [
     'central_domains' => [
         '127.0.0.1',
         'localhost',
+        env('APP_DOMAIN', 'localhost'),
     ],
 
     /**
@@ -51,8 +49,8 @@ return [
          * Tenant database names are created like this:
          * prefix + tenant_id + suffix.
          */
-        'prefix' => 'tenant',
-        'suffix' => '',
+        'prefix' => env('DB_TENANT_PREFIX', 'tenant_'),
+        'suffix' => env('DB_TENANT_SUFFIX', ''),
 
         /**
          * TenantDatabaseManagers are classes that handle the creation & deletion of tenant databases.

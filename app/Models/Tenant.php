@@ -2,10 +2,19 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Stancl\Tenancy\Database\Models\Tenant as BaseTenant;
+use Stancl\Tenancy\Contracts\TenantWithDatabase;
+use Stancl\Tenancy\Database\Concerns\HasDatabase;
+use Stancl\Tenancy\Database\Concerns\HasDomains;
 
-class Tenant extends BaseTenant
+class Tenant extends BaseTenant implements TenantWithDatabase
 {
-    use HasFactory;
+    use HasDatabase, HasDomains;
+
+    static function booted()
+    {
+        static::created(function ($model) { 
+            $model->domains()->create(['domain' => $model->id .'.'. env('APP_DOMAIN', 'localhost')]);
+        });
+    }
 }
