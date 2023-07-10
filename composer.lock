@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "91e712be4cbe9455c66cef30670bb7ee",
+    "content-hash": "b6e447374c65fed7fefecd4b7d185ce7",
     "packages": [
         {
             "name": "brick/math",
@@ -478,6 +478,42 @@
                 }
             ],
             "time": "2023-01-14T14:17:03+00:00"
+        },
+        {
+            "name": "endropie/lumen-rest-api",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/endropie/lumen-rest-api.git",
+                "reference": "2959a3e6b61069ddefe7f393f7ebff20a1fb604d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/endropie/lumen-rest-api/zipball/2959a3e6b61069ddefe7f393f7ebff20a1fb604d",
+                "reference": "2959a3e6b61069ddefe7f393f7ebff20a1fb604d",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Endropie\\LumenRestApi\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "endropie",
+                    "email": "hendrowibo@msn.com"
+                }
+            ],
+            "support": {
+                "issues": "https://github.com/endropie/lumen-rest-api/issues",
+                "source": "https://github.com/endropie/lumen-rest-api/tree/1.0.2"
+            },
+            "time": "2022-11-24T07:20:50+00:00"
         },
         {
             "name": "facade/ignition-contracts",
