@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\ApiControllers;
+namespace App\Http\Api;
 
 use App\Http\Filters\TenantInviteFilter;
 use App\Http\Resources\TenantInviteResource;
@@ -9,9 +9,10 @@ use Illuminate\Http\Request;
 
 class TenantInviteController extends Controller
 {
-    public function index(TenantInviteFilter $filter)
+    public function index($id, TenantInviteFilter $filter)
     {
-        $collection = TenantInvite::filter($filter)->collective();
+        $collection = TenantInvite::whereHas('tenant', fn($q) => $q->where('id', $id))
+            ->filter($filter)->collective();
 
         return TenantInviteResource::collection($collection);
     }
@@ -53,10 +54,10 @@ class TenantInviteController extends Controller
     public function confirmByToken(Request $request)
     {
         $request->validate([
-            'token' => 'required|string', 
+            'token' => 'required|string',
             'confirm' => 'required|in:rejected,accepted',
         ]);
-        
+
         $record = TenantInvite::authorized()->inviting()->whereToken($request->get('token'))->firstOrFail();
 
         app('db')->beginTransaction();

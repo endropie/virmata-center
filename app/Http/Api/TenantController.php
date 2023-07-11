@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\ApiControllers;
+namespace App\Http\Api;
 
 use App\Http\Filters\TenantFilter;
 use App\Http\Resources\TenantResource;
@@ -11,7 +11,7 @@ class TenantController extends Controller
 {
     public function index(TenantFilter $filter)
     {
-        $collection = Tenant::filter($filter)->collective();
+        $collection = Tenant::authorized()->filter($filter)->collective();
 
         return TenantResource::collection($collection);
     }
@@ -26,7 +26,7 @@ class TenantController extends Controller
         ]);
 
         $row = $request->only([
-            "id", "name", "tenant_type_id", "address"
+            "id", "name", "tenant_type_id", "address", 'cluster', 'avatar',
         ]);
 
         // app('db')->beginTransaction();

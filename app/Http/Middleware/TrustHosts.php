@@ -15,6 +15,7 @@ class TrustHosts extends Middleware
     {
         return [
             $this->allSubdomainsOfApplicationUrl(),
+            env('APP_DOMAIN') . ":9000",
         ];
     }
 }

@@ -23,7 +23,8 @@ class CreateTenantsTable extends Migration
             $table->json('data')->nullable();
             $table->foreignUuid('owner_uid');
             $table->timestamps();
-            
+            $table->softDeletes();
+
             $table->foreign('tenant_type_id')->on('tenant_types')->references('id')->restrictOnDelete();
             $table->foreign('owner_uid')->on('users')->references('id')->restrictOnDelete();
         });

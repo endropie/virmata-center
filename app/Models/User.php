@@ -4,16 +4,17 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use Endropie\LumenAuthToken\Concerns\AuthorizableToken;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
+// use Laravel\Sanctum\HasApiTokens;
 use Stancl\Tenancy\Database\Concerns\CentralConnection;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, CentralConnection, HasUuids;
+    use AuthorizableToken, HasFactory, Notifiable, CentralConnection, HasUuids;
 
     /**
      * The attributes that are mass assignable.

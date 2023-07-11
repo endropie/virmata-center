@@ -19,6 +19,23 @@ use Inertia\Inertia;
 */
 
 Route::middleware(['web'])->group(function () {
+    Route::get('/csrf_token/faker', function (\Illuminate\Http\Request $request) {
+        $user = $request->get('auth')
+            ? \App\Models\User::find($request->get('auth'))
+            : \App\Models\User::first();
+
+        /** @var \App\Models\User $user */
+        $token = $user->token();
+        return response()->json(["token" => $token]);
+    });
+
+    Route::middleware('auth')->get('/csrf_token', function () {
+        $user = auth()->user();
+        /** @var \App\Models\User $user */
+        $token = $user->token();
+        return response()->json(["token" => $token]);
+    });
+
     Route::get('/', function () {
         return 'This is account application.';
     });

@@ -3,8 +3,19 @@
 declare(strict_types=1);
 
 return [
-    'tenant_model' => \App\Models\Tenant::class,
-    'domain_model' => \App\Models\Domain::class,
+    'app' => [
+        'cluster' => [
+            'defaults' => 'lite',
+            'options' => [
+                'lite' => [],
+                'essential' => [],
+                'professional' => [],
+                'enterprise' => [],
+            ]
+        ]
+    ],
+    'tenant_model' => App\Models\Tenant::class,
+    'domain_model' => App\Models\Domain::class,
 
     'id_generator' => Stancl\Tenancy\UUIDGenerator::class,
 

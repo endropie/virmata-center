@@ -30,16 +30,16 @@ class TenantInvite extends Model
     {
         $user = auth()->user();
         return $query->whereIn('context', [$user->email]);
-    }  
+    }
 
     public function scopeInviting($query)
     {
         return $query->whereNull('confirmed_at');
-    }  
+    }
 
     public function setConfirmed($confirm = 'accepted' | 'rejected', $option = [])
     {
-        if ($confirm == 'accepted') 
+        if ($confirm == 'accepted')
         {
             $this->tenant->setUserAccess(auth()->user(), $option);
         }
@@ -52,22 +52,22 @@ class TenantInvite extends Model
         $this->save();
     }
 
-    public function setCreatedPlainToken($token) 
+    public function setCreatedPlainToken($token)
     {
         $this->createdPlainToken = $token;
     }
 
-    public function getCreatedPlainToken() 
+    public function getCreatedPlainToken()
     {
         return $this->createdPlainToken;
     }
-    
+
     static public function booted()
     {
         static::creating(function (self $model) {
 
             $model->token = hash('sha256', $plainToken = stringable()->random(40));
-            if ($plainToken && env('APP_ENV') === "local") 
+            if ($plainToken && env('APP_ENV') === "local")
             {
                 $model->setCreatedPlainToken($plainToken);
             }

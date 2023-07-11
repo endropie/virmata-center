@@ -15,9 +15,15 @@ class TenantResource extends Resource
     {
         return [
             $this->mergeAttributes(),
-            $this->mergeField('owner', function () {
+            $this->mergeInclude('owner', function () {
                 return new UserResource($this->resource->owner);
-            })
+            }),
+            $this->mergeField('is_owner', function () {
+                return $this->resource->isOwner();
+            }),
+            $this->mergeField('as_level', function () {
+                return $this->resource->asLevel();
+            }),
         ];
     }
 }
